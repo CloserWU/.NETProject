@@ -1,0 +1,14 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (ConsoleApplication1.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  lex.yy.c
+e:\vsproject\compilerexperiment1\compilerexperiment1\utility.h(24): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1465): note: see declaration of 'vsprintf'
+e:\vsproject\compilerexperiment1\compilerexperiment1\scanner.l(107): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: see declaration of 'strcpy'
+e:\vsproject\compilerexperiment1\compilerexperiment1\scanner.l(113): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: see declaration of 'strcpy'
+e:\vsproject\compilerexperiment1\compilerexperiment1\lex.yy.c(1473): warning C4273: 'isatty': inconsistent dll linkage
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_io.h(489): note: see previous definition of 'isatty'
+e:\vsproject\compilerexperiment1\compilerexperiment1\lex.yy.c(1498): warning C4996: 'isatty': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _isatty. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\corecrt_io.h(489): note: see declaration of 'isatty'
+  ConsoleApplication1.vcxproj -> E:\VSProject\CompilerExperiment1\Debug\CompilerExperiment1.exe
+  ConsoleApplication1.vcxproj -> E:\VSProject\CompilerExperiment1\Debug\CompilerExperiment1.pdb (Full PDB)

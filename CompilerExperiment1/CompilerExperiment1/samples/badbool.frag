@@ -1,0 +1,13 @@
+TRUE
+000123
+FALSE
+true
+True
+false
+False
++1.222
+-555
+627
+-5.5e+32
+0X5f
+void
