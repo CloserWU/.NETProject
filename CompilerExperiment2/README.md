@@ -1,5 +1,9 @@
 ## 编译原理语法分析
 
+## output
+
+![](CompilerExperiment2/example.png)
+
 代码中包含注释，请仔细阅读
 
 新建项目的化，需要 
