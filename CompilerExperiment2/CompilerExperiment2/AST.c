@@ -26,8 +26,7 @@ struct list* initChild(struct ast* node) {
 // 将一个list节点加入到一个ast节点的childs中
 void addChild(struct ast* root, struct ast* child) {
 	if (root == NULL || child == NULL) {
-		yyerror("null pointer of root");
-		exit(0);
+		return;
 	}
 	// 如果ast的childs为空，则直接赋值
 	if (root->childs == NULL) {

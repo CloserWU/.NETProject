@@ -841,7 +841,7 @@ case 1:
 #line 105 "parser.y"
 { printf("Program -> DeclList\n");
 				  /* $$ = func($1...)*/
-				  yyval.a = buildAST("Program", 1, "DeclList");
+				  yyval.a = yyvsp[0].a;
 				  root = yyval.a;
 				  yylsp[0]
 				;
@@ -849,541 +849,541 @@ case 1:
 case 2:
 #line 114 "parser.y"
 { printf("DeclList -> DeclList Decl\n");
-				  yyval.a = buildAST("DeclList", 2, "DeclList", "Decl");
+				  yyval.a = buildAST("DeclList", 2, yyvsp[-1].a, yyvsp[0].a);
 				;
     break;}
 case 3:
 #line 118 "parser.y"
 { printf("DeclList ->\n"); 
-				  yyval.a = buildAST("DeclList", 1, "null");
+				  yyval.a = NULL;
 				;
     break;}
 case 4:
 #line 124 "parser.y"
 { printf("Decl -> FunctionDecl\n");
-				  yyval.a = buildAST("Decl", 1, "FunctionDecl");
+				  yyval.a = yyvsp[0].a;
 				;
     break;}
 case 5:
 #line 128 "parser.y"
 { printf("Decl -> FunctionDefn\n");
-				  yyval.a = buildAST("Decl", 1, "FunctionDefn");
+				  yyval.a = yyvsp[0].a;
 				;
     break;}
 case 6:
 #line 132 "parser.y"
 { printf("Decl -> ClassDefn\n");
-				  yyval.a = buildAST("Decl", 1, "ClassDefn");
+				  yyval.a = yyvsp[0].a;
 				;
     break;}
 case 7:
 #line 136 "parser.y"
 { printf("Decl -> VaruableDecl\n");
-				  yyval.a = buildAST("Decl", 1, "VariableDecl");
+				  yyval.a = yyvsp[0].a;
 				;
     break;}
 case 8:
 #line 142 "parser.y"
 { printf("VariableDecl -> Variable ;\n");
-				  yyval.a = buildAST("VariableDecl", 2, "Variable", ";");
+				  yyval.a = buildAST("VariableDecl", 2, yyvsp[-1].a, newAST(";"));
 				;
     break;}
 case 9:
 #line 148 "parser.y"
 { printf("Variable -> Type identifier\n");
-				  yyval.a = buildAST("Variable", 2, "Type", "identifier");
+				  yyval.a = buildAST("Variable", 2, yyvsp[-1].a, newAST("identifier"));
 				;
     break;}
 case 10:
 #line 154 "parser.y"
 { printf("Type -> int\n");
-				  yyval.a = buildAST("Type", 1, "int");
+				  yyval.a = newAST("int");
 				;
     break;}
 case 11:
 #line 158 "parser.y"
 { printf("Type -> double\n");
-				  yyval.a = buildAST("Type", 1, "double");
+				  yyval.a = newAST("double");
 				;
     break;}
 case 12:
 #line 162 "parser.y"
 { printf("Type -> bool\n");
-				  yyval.a = buildAST("Type", 1, "bool");
+				  yyval.a = newAST("bool");
 				;
     break;}
 case 13:
 #line 166 "parser.y"
 { printf("Type -> string\n");
-				  yyval.a = buildAST("Type", 1, "string");
+				  yyval.a = newAST("string");
 				;
     break;}
 case 14:
 #line 170 "parser.y"
 { printf("Type -> void\n");
-				  yyval.a = buildAST("Type", 1, "void");
+				  yyval.a = newAST("void");
 				;
     break;}
 case 15:
 #line 174 "parser.y"
 { printf("Type -> class identifier\n");
-				  yyval.a = buildAST("Type", 2, "class", "identifier");
+				  yyval.a = buildAST("Type", 2, newAST("class"), newAST("identifier"));
 				;
     break;}
 case 16:
 #line 178 "parser.y"
 { printf("Type -> Type []\n");
-				  yyval.a = buildAST("Type", 3, "Type", "[", "]");
+				  yyval.a = buildAST("Type", 3, yyvsp[-2].a, newAST("["), newAST("]"));
 				;
     break;}
 case 17:
 #line 184 "parser.y"
 { printf("FunctionDecl -> Type identifier ( Formals ) ;\n");
-				  yyval.a = buildAST("FunctionDecl", 6, "Type", "identifier", "(", "Formals", ")", ";");
+				  yyval.a = buildAST("FunctionDecl", 6, yyvsp[-5].a, newAST("identifier"), newAST("("), yyvsp[-2].a, newAST(")"), newAST(";"));
 				;
     break;}
 case 18:
 #line 190 "parser.y"
 { printf("Formals -> VariableList \n");
-				  yyval.a = buildAST("Formals", 1, "VariableList");
+				  yyval.a = yyvsp[0].a;
 				;
     break;}
 case 19:
 #line 194 "parser.y"
 { printf("Formals -> \n");
-				  yyval.a = buildAST("Formals", 1, "null");
+				  yyval.a = NULL;
 				;
     break;}
 case 20:
 #line 200 "parser.y"
 { printf("VariableList -> VariableList , Variable\n");
-				  yyval.a = buildAST("VariableList", 3, "VariableList", ",", "Variable");
+				  yyval.a = buildAST("VariableList", 3, yyvsp[-2].a, newAST(","), yyvsp[0].a);
 				;
     break;}
 case 21:
 #line 204 "parser.y"
 { printf("VariableList -> Variable\n");
-				  yyval.a = buildAST("VariableList", 1, "Variable");
+				  yyval.a = yyvsp[0].a;
 				;
     break;}
 case 22:
 #line 210 "parser.y"
 { printf("FunctionDefn -> Type identifier ( Formals ) StmtBlock\n");
-				  yyval.a = buildAST("FunctionDefn", 6, "Type", "identifier", "(", "Formals", ")", "StmtBlock");
+				  yyval.a = buildAST("FunctionDefn", 6, yyvsp[-5].a, newAST("identifier"), newAST("("), yyvsp[-2].a, newAST(")"), yyvsp[0].a);
 				;
     break;}
 case 23:
 #line 216 "parser.y"
 { printf("ClassDefn -> class identifier OptExtends { FieldList } \n");
-				  yyval.a = buildAST("ClassDefn", 6, "class", "identifier", "OptExtends", "{", "FieldList", "}");
+				  yyval.a = buildAST("ClassDefn", 6, newAST("class"), newAST("identifier"), yyvsp[-3].a, newAST("{"), yyvsp[-1].a, newAST("}"));
 				;
     break;}
 case 24:
 #line 222 "parser.y"
 { printf("OptExtends -> extends identifier\n");
-			     yyval.a = buildAST("OptExtends", 2, "extends", "identifier");
+			     yyval.a = buildAST("OptExtends", 2, newAST("extends"), newAST("identifier"));
 			   ;
     break;}
 case 25:
 #line 226 "parser.y"
 { printf("OptExtends -> \n");
-			     yyval.a = buildAST("OptExtends", 1, "null");
+			     yyval.a = NULL;
 			   ;
     break;}
 case 26:
 #line 232 "parser.y"
 { printf("FieldList -> FieldList Field\n");
-				  yyval.a = buildAST("FieldList", 2, "FieldList", "Field");
+				  yyval.a = buildAST("FieldList", 2, yyvsp[-1].a, yyvsp[0].a);
 				;
     break;}
 case 27:
 #line 236 "parser.y"
 { printf("FieldList -> \n");
-				  yyval.a = buildAST("FieldList", 1, "null");
+				  yyval.a = NULL;
 				;
     break;}
 case 28:
 #line 242 "parser.y"
 { printf("Field -> VariableDecl\n");
-				  yyval.a = buildAST("Field", 1, "VariableDecl");
+				  yyval.a = yyvsp[0].a;
 				;
     break;}
 case 29:
 #line 246 "parser.y"
 { printf("Field -> FunctionDecl\n");
-				  yyval.a = buildAST("Field", 1, "FunctionDecl");
+				  yyval.a = yyvsp[0].a;
 				;
     break;}
 case 30:
 #line 250 "parser.y"
 { printf("Field -> FunctionDefn\n");
-				  yyval.a = buildAST("Field", 1, "FunctionDefn");
+				  yyval.a = yyvsp[0].a;
 				;
     break;}
 case 31:
 #line 256 "parser.y"
 { printf("StmtBlock -> { StmtList } \n");
-				  yyval.a = buildAST("StmtBlock", 3, "{", "StmtList", "}");
+				  yyval.a = buildAST("StmtBlock", 3, newAST("{"), yyvsp[-1].a, newAST("}"));
 				;
     break;}
 case 32:
 #line 262 "parser.y"
 { printf("StmtList -> StmtList Stmt\n");
-				  yyval.a = buildAST("StmtList", 2, "StmtList", "Stmt");
+				  yyval.a = buildAST("StmtList", 2, yyvsp[-1].a, yyvsp[0].a);
 				;
     break;}
 case 33:
 #line 266 "parser.y"
 { printf("StmtList ->\n");
-				  yyval.a = buildAST("StmtList", 1, "null");
+				  yyval.a = NULL;
 				;
     break;}
 case 34:
 #line 272 "parser.y"
 { printf("Stmt -> VariableDecl\n");
-				  yyval.a = buildAST("Stmt", 1, "VariableDecl");
+				  yyval.a = yyvsp[0].a;
 				;
     break;}
 case 35:
 #line 276 "parser.y"
 { printf("Stmt -> SimpleStmt ;\n");
-				  yyval.a = buildAST("Stmt", 2, "SimpleStmt", ";");
+				  yyval.a = yyvsp[-1].a;
 				;
     break;}
 case 36:
 #line 280 "parser.y"
 { printf("Stmt -> IfStmt\n");
-				  yyval.a = buildAST("Stmt", 1, "IfStmt");
+				  yyval.a = yyvsp[0].a;
 				;
     break;}
 case 37:
 #line 284 "parser.y"
 { printf("Stmt -> WhileStmt\n");
-				  yyval.a = buildAST("Stmt", 1, "WhileStmt");
+				  yyval.a = yyvsp[0].a;
 				;
     break;}
 case 38:
 #line 288 "parser.y"
 { printf("Stmt -> ForStmt\n");
-				  yyval.a = buildAST("Stmt", 1, "ForStmt");
+				  yyval.a = yyvsp[0].a;
 				;
     break;}
 case 39:
 #line 292 "parser.y"
 { printf("Stmt -> ReturnStmt ;\n");
-				  yyval.a = buildAST("Stmt", 2, "ReturnStmt", ";");
+				  yyval.a = buildAST("Stmt", 2, yyvsp[-1].a, newAST(";"));
 				;
     break;}
 case 40:
 #line 296 "parser.y"
 { printf("Stmt -> PrintStmt ;\n");
-				  yyval.a = buildAST("Stmt", 2, "PrintStmt", ";");
+				  yyval.a = buildAST("Stmt", 2, yyvsp[-1].a, newAST(";"));
 				;
     break;}
 case 41:
 #line 300 "parser.y"
 { printf("Stmt -> StmtBlock\n");
-				  yyval.a = buildAST("Stmt", 1, "StmtBlock");
+				  yyval.a = yyvsp[0].a;
 				;
     break;}
 case 42:
 #line 306 "parser.y"
 { printf("SimpleStmt -> LValue = Expr\n");
-				  yyval.a = buildAST("SimpleStmt", 3, "LValue", "=", "Expr");
+				  yyval.a = buildAST("SimpleStmt", 3, yyvsp[-2].a, newAST("="), yyvsp[0].a);
 				;
     break;}
 case 43:
 #line 310 "parser.y"
 { printf("SimpleStmt -> Expr\n");
-				  yyval.a = buildAST("SimpleStmt", 1, "Expr");
+				  yyval.a = yyvsp[0].a;
 				;
     break;}
 case 44:
 #line 314 "parser.y"
 { printf("SimpleStmt -> \n");
-				  yyval.a = buildAST("SimpleStmt", 1, "null");
+				  yyval.a = NULL;
 				;
     break;}
 case 45:
 #line 320 "parser.y"
 { printf("LValue -> OptReceiver identifier\n");
-				  yyval.a = buildAST("LValue", 2, "OptReceiver", "identifier");
+				  yyval.a = buildAST("LValue", 2, yyvsp[-1].a, newAST("identifier"));
 				;
     break;}
 case 46:
 #line 324 "parser.y"
 { printf("LValue -> Expr [ Expr ] \n");
-				  yyval.a = buildAST("LValue", 4, "Expr", "[", "Expr", "]");
+				  yyval.a = buildAST("LValue", 4, yyvsp[-3].a, newAST("["), yyvsp[-1].a, newAST("]"));
 				;
     break;}
 case 47:
 #line 330 "parser.y"
 { printf("Call -> OptReceiver identifier ( Actuals )\n");
-				  yyval.a = buildAST("Call", 5, "OptReceiver", "identifier", "(", "Actuals", ")");
+				  yyval.a = buildAST("Call", 5, yyvsp[-4].a, newAST("identifier"), newAST("("), yyvsp[-1].a, newAST(")"));
 				;
     break;}
 case 48:
 #line 336 "parser.y"
 { printf("OptReceiver -> Expr .\n");
-				  yyval.a = buildAST("OptReceiver", 2, "Expr", ".");
+				  yyval.a = buildAST("OptReceiver", 2, yyvsp[-1].a, newAST("."));
 				;
     break;}
 case 49:
 #line 340 "parser.y"
 { printf("OptReceiver -> \n");
-			     yyval.a = buildAST("OptReceiver", 1, "null");
+			     yyval.a = NULL;
 			   ;
     break;}
 case 50:
 #line 346 "parser.y"
 { printf("Actuals -> ExprList\n");
-				  yyval.a = buildAST("Actuals", 1, "ExprList");
+				  yyval.a = yyvsp[0].a;
 				;
     break;}
 case 51:
 #line 350 "parser.y"
 { printf("Actuals -> \n");
-				  yyval.a = buildAST("Actuals", 1, "null");
+				  yyval.a = NULL;
 				;
     break;}
 case 52:
 #line 356 "parser.y"
 { printf("ExprList -> ExprList , Expr\n");
-				  yyval.a = buildAST("ExprList", 3, "ExprList", ",", "Expr");
+				  yyval.a = buildAST("ExprList", 3, yyvsp[-2].a, newAST(","), yyvsp[0].a);
 				;
     break;}
 case 53:
 #line 360 "parser.y"
 { printf("ExprList -> Expr\n");
-				  yyval.a = buildAST("ExprList", 1, "Expr");
+				  yyval.a = yyvsp[0].a;
 				;
     break;}
 case 54:
 #line 366 "parser.y"
 { printf("ForStmt -> for ( SimpleStmt ; BoolExpr ; SimpleStmt ) Stmt \n");
-				  yyval.a = buildAST("ForStmt", 9, "for", "(", "SimpleStmt", ";", "BoolExpr", ";", "SimpleStmt", ")", "Stmt");
+				  yyval.a = buildAST("ForStmt", 9, newAST("for"), newAST("("), yyvsp[-6].a, newAST(";"), yyvsp[-4].a, newAST(";"), yyvsp[-2].a, newAST(")"), yyvsp[0].a);
 				;
     break;}
 case 55:
 #line 372 "parser.y"
 { printf("WhileStmt -> while( BoolExpr ) Stmt \n");
-				  yyval.a = buildAST("WhileStmt", 5, "while", "(", "BoolExpr", ")", "Stmt");
+				  yyval.a = buildAST("WhileStmt", 5, newAST("while"), newAST("("), yyvsp[-2].a, newAST(")"), yyvsp[0].a);
 				;
     break;}
 case 56:
 #line 378 "parser.y"
 { printf("IfStmt -> if ( BoolExpr ) Stmt OptElse \n");
-				  yyval.a = buildAST("IfStmt", 6, "if", "(", "BoolExpr", ")", "Stmt", "OptElse");
+				  yyval.a = buildAST("IfStmt", 6, newAST("if"), newAST("("), yyvsp[-3].a, newAST(")"), yyvsp[-1].a, yyvsp[0].a);
 				;
     break;}
 case 57:
 #line 384 "parser.y"
 { printf("OptElse -> else Stmt\n");
-				  yyval.a = buildAST("OptElse", 2, "else", "Stmt");
+				  yyval.a = buildAST("OptElse", 2, newAST("else"), yyvsp[0].a);
 				;
     break;}
 case 58:
 #line 388 "parser.y"
 { printf("OptElse -> \n");
-				  yyval.a = buildAST("OptElse", 1, "null");
+				  yyval.a = NULL;
 				;
     break;}
 case 59:
 #line 394 "parser.y"
 { printf("ReturnStmt -> return\n");
-				  yyval.a = buildAST("ReturnStmt", 1, "retuen");
+				  yyval.a = newAST("return");
 				;
     break;}
 case 60:
 #line 398 "parser.y"
 { printf("ReturnStmt -> return Expr \n");
-				  yyval.a = buildAST("ReturnStmt", 2, "return", "Expr");
+				  yyval.a = buildAST("ReturnStmt", 2, newAST("return"), yyvsp[0].a);
 				;
     break;}
 case 61:
 #line 404 "parser.y"
 { printf("PrintStmt -> print ( ExprList ) \n");
-				  yyval.a = buildAST("PrintStmt", 4, "print", "(", "ExprList", ")");
+				  yyval.a = buildAST("PrintStmt", 4, newAST("print"), newAST("("), yyvsp[-1].a, newAST(")"));
 				;
     break;}
 case 62:
 #line 410 "parser.y"
 { printf("BoolExpr -> Expr\n");
-				  yyval.a = buildAST("BoolExpr", 1, "Expr");
+				  yyval.a = yyvsp[0].a;
 				;
     break;}
 case 63:
 #line 416 "parser.y"
 { printf("Expr -> Constant\n");
-				  yyval.a = buildAST("Expr", 1, "Constant");
+				  yyval.a = yyvsp[0].a;
 				;
     break;}
 case 64:
 #line 420 "parser.y"
 { printf("Expr -> LValue\n");
-				 yyval.a = buildAST("Expr", 1, "LValue");
+				  yyval.a = yyvsp[0].a;
 				;
     break;}
 case 65:
 #line 424 "parser.y"
 { printf("Expr -> this\n");
-				  yyval.a = buildAST("Expr", 1, "this");
+				  yyval.a = newAST("this");
 				;
     break;}
 case 66:
 #line 428 "parser.y"
 { printf("Expr -> Call\n");
-				  yyval.a = buildAST("Expr", 1, "Call");
+				  yyval.a = yyvsp[0].a;
 				;
     break;}
 case 67:
 #line 432 "parser.y"
 { printf("Expr -> ( Expr ) \n");
-				  yyval.a = buildAST("Expr", 3, "(", "Expr", ")");
+				  yyval.a = buildAST("Expr", 3, newAST("("), yyvsp[-1].a, newAST(")"));
 				;
     break;}
 case 68:
 #line 436 "parser.y"
 { printf("Expr -> Expr + Expr \n");
-				  yyval.a = buildAST("Expr", 3, "Expr", "+", "Expr");
+				  yyval.a = buildAST("Expr", 3, yyvsp[-2].a, newAST("+"), yyvsp[0].a);
 				;
     break;}
 case 69:
 #line 440 "parser.y"
 { printf("Expr -> Expr - Expr \n");
-				  yyval.a = buildAST("Expr", 3, "Expr", "-", "Expr");
+				  yyval.a = buildAST("Expr", 3, yyvsp[-2].a, newAST("-"), yyvsp[0].a);
 				;
     break;}
 case 70:
 #line 444 "parser.y"
 { printf("Expr -> Expr * Expr \n");
-				  yyval.a = buildAST("Expr", 3, "Expr", "*", "Expr");
+				  yyval.a = buildAST("Expr", 3, yyvsp[-2].a, newAST("*"), yyvsp[0].a);
 				;
     break;}
 case 71:
 #line 448 "parser.y"
 { printf("Expr -> Expr / Expr \n");
-				  yyval.a = buildAST("Expr", 3, "Expr", "/", "Expr");
+				  yyval.a = buildAST("Expr", 3, yyvsp[-2].a, newAST("/"), yyvsp[0].a);
 				;
     break;}
 case 72:
 #line 452 "parser.y"
 { printf("Expr -> Expr %% Expr \n");
-				  yyval.a = buildAST("Expr", 3, "Expr", "%", "Expr");
+				  yyval.a = buildAST("Expr", 3, yyvsp[-2].a, newAST("%"), yyvsp[0].a);
 				;
     break;}
 case 73:
 #line 456 "parser.y"
 { printf("Expr -> - Expr \n");
-				  yyval.a = buildAST("Expr", 2, "-", "Expr");
+				  yyval.a = buildAST("Expr", 2, newAST("-"), yyvsp[0].a);
 				;
     break;}
 case 74:
 #line 460 "parser.y"
 { printf("Expr -> Expr < Expr \n");
-				  yyval.a = buildAST("Expr", 3, "Expr", "<", "Expr");
+				  yyval.a = buildAST("Expr", 3, yyvsp[-2].a, newAST("<"), yyvsp[0].a);
 				;
     break;}
 case 75:
 #line 464 "parser.y"
 { printf("Expr -> Expr <= Expr \n");
-				  yyval.a = buildAST("Expr", 3, "Expr", "<=", "Expr");
+				  yyval.a = buildAST("Expr", 3, yyvsp[-2].a, newAST("<="), yyvsp[0].a);
 				;
     break;}
 case 76:
 #line 468 "parser.y"
 { printf("Expr -> Expr > Expr \n");
-				  yyval.a = buildAST("Expr", 3, "Expr", ">", "Expr");
+				  yyval.a = buildAST("Expr", 3, yyvsp[-2].a, newAST(">"), yyvsp[0].a);
 				;
     break;}
 case 77:
 #line 472 "parser.y"
 { printf("Expr -> Expr >= Expr\n");
-				  yyval.a = buildAST("Expr", 3, "Expr", ">=", "Expr");
+				  yyval.a = buildAST("Expr", 3, yyvsp[-2].a, newAST(">="), yyvsp[0].a);
 				;
     break;}
 case 78:
 #line 476 "parser.y"
 { printf("Expr -> Expr == Expr \n");
-				  yyval.a = buildAST("Expr", 3, "Expr", "==", "Expr");
+				  yyval.a = buildAST("Expr", 3, yyvsp[-2].a, newAST("=="), yyvsp[0].a);
 				;
     break;}
 case 79:
 #line 480 "parser.y"
 { printf("Expr -> Expr != Expr \n");
-				  yyval.a = buildAST("Expr", 3, "Expr", "!=", "Expr");
+				  yyval.a = buildAST("Expr", 3, yyvsp[-2].a, newAST("!="), yyvsp[0].a);
 				;
     break;}
 case 80:
 #line 484 "parser.y"
 { printf("Expr -> Expr && Expr \n");
-				  yyval.a = buildAST("Expr", 3, "Expr", "&&", "Expr");
+				  yyval.a = buildAST("Expr", 3, yyvsp[-2].a, newAST("&&"), yyvsp[0].a);
 				;
     break;}
 case 81:
 #line 488 "parser.y"
 { printf("Expr -> Expr || Expr \n");
-				  yyval.a = buildAST("Expr", 3, "Expr", "||", "Expr");
+				  yyval.a = buildAST("Expr", 3, yyvsp[-2].a, newAST("||"), yyvsp[0].a);
 				;
     break;}
 case 82:
 #line 492 "parser.y"
 { printf("Expr -> ! Expr \n");
-				  yyval.a = buildAST("Expr", 2, "!", "Expr");
+				  yyval.a = buildAST("Expr", 2, newAST("!"), yyvsp[0].a);
 				;
     break;}
 case 83:
 #line 496 "parser.y"
 { printf("Expr -> ReadInteger ( ) \n");
-				  yyval.a = buildAST("Expr", 3, "readInteger", "(", ")");
+				  yyval.a = buildAST("Expr", 3, newAST("readInteger"), newAST("("), newAST(")"));
 				;
     break;}
 case 84:
 #line 500 "parser.y"
 { printf("Expr -> ReadLine ( ) \n");
-				  yyval.a = buildAST("Expr", 3, "readLine", "(", ")");
+				  yyval.a = buildAST("Expr", 3, newAST("readLine"), newAST("("), newAST(")"));
 				;
     break;}
 case 85:
 #line 504 "parser.y"
 { printf("Expr -> New ( identifier ) \n");
-				  yyval.a = buildAST("Expr", 4, "new", "(", "identifier", ")");
+				  yyval.a = buildAST("Expr", 4, newAST("new"), newAST("("), newAST("identifier"), newAST(")"));
 				;
     break;}
 case 86:
 #line 508 "parser.y"
 { printf("Expr -> NewArray ( Expr , Type )\n");
-				  yyval.a = buildAST("Expr", 6, "newArray", "(", "Expr", ",", "Type", ")");
+				  yyval.a = buildAST("Expr", 6, newAST("newArray"), newAST("("), yyvsp[-3].a, newAST(","), yyvsp[-1].a, newAST(")"));
 				;
     break;}
 case 87:
 #line 514 "parser.y"
 { printf("Constant -> intConstant\n");
-				  yyval.a = buildAST("Constant", 1, "intConstant");
+				  yyval.a = newAST("intConstant");
 				;
     break;}
 case 88:
 #line 518 "parser.y"
 { printf("Constant -> doubleConstant\n");
-				  yyval.a = buildAST("Constant", 1, "doubleConstant");
+				  yyval.a = newAST("doubleConstant")
 				;
     break;}
 case 89:
 #line 522 "parser.y"
 { printf("Constant -> boolConstant\n");
-				  yyval.a = buildAST("Constant", 1, "boolConstant");
+				  yyval.a = newAST("boolConstant")
 				;
     break;}
 case 90:
 #line 526 "parser.y"
 { printf("Constant -> stringConstant\n");
-				  yyval.a = buildAST("Constant", 1, "stringConstant");
+				  yyval.a = newAST("stringConstant")
 				;
     break;}
 case 91:
 #line 530 "parser.y"
 { printf("Constant -> null\n");
-				  yyval.a = buildAST("Constant", 1, "null");
+				  yyval.a = newAST("")
 				;
     break;}
 }
@@ -1596,6 +1596,18 @@ void Inityyparse(void) {
  * 这样做的原因是， bison是LALR(1) 自底向上分析，因此右侧记号是先识别出来的
  */
 struct ast* buildAST(char* rootKey, int n, ...) {
+	struct ast* root = newAST(rootKey);
+	va_list valist;
+	va_start(valist, n);
+	for (int i = 0; i < n; i++) {
+		struct ast* child = va_arg(valist, struct ast*);
+		addChild(root, child);
+	}
+	va_end(valist);
+	return root;
+}
+
+struct ast* buildRaw(char* rootKey, int n, ...) {
 	struct ast* root = newAST(rootKey);
 	va_list valist;
 	va_start(valist, n);
